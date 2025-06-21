@@ -116,8 +116,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::middleware('role:outlet-in-charge')->prefix('outlet')->name('outlet.')->group(function () {
+        // order workflow
         Route::get('orders', [OrderController::class, 'myOutletOrders'])->name('orders.index');
         Route::post('orders/{order}/accept', [OrderController::class, 'accept'])->name('orders.accept');
-        Route::post('orders/{order}/transfer', [OrderController::class, 'transfer'])->name('orders.transfer');
+        Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+        Route::post('orders/{order}/transfer',[OrderController::class,'transfer'])->name('orders.transfer');
     });
 });

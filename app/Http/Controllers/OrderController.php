@@ -136,6 +136,28 @@ class OrderController extends Controller
 
         return back()->with('success', 'Order transferred.');
     }
+    public function myOutletOrders()
+    {
+        $user = auth()->user();
 
+        // Guard: outlet_id must be set
+        if (!$user->outlet_id) {
+            abort(403, 'No outlet assigned to this account.');
+        }
+
+        $managedOutletId = $user->outlet_id;
+
+        /* 1. Only this outlet’s orders (eager-load relations) */
+        $orders = Order::with(['user', 'outlet', 'orderItems'])
+                    ->where('outlet_id', $managedOutletId)
+                    ->latest()
+                    ->get();
+
+        /* 2. Other outlets for the transfer dropdown */
+        $outlets = Outlet::where('id', '<>', $managedOutletId)->get();
+
+        /* 3. Render the Outlet-in-Charge dashboard */
+        return view('dashboards.outlet-in-charge', compact('orders', 'outlets'));
+    }
 
 }

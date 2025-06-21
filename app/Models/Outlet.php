@@ -20,4 +20,8 @@ class Outlet extends Model
     {
         return $this->hasMany(Order::class);
     }
+    public function managers()
+    {
+        return $this->hasMany(User::class);
+    }
 }
