@@ -96,12 +96,11 @@ class ProductController extends Controller
             'name'        => 'required|string|max:255',
             'price'       => 'required|numeric|min:0',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Make image nullable here
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', 
         ];
 
         $data = $request->validate($rules);
 
-        // If a new image is uploaded, process and save it
         if ($request->hasFile('image')) {
             $folder = public_path('images');
             if (!is_dir($folder)) {
@@ -113,7 +112,6 @@ class ProductController extends Controller
             $data['image_path'] = 'images/' . $filename;
         }
 
-        // If no new image uploaded, keep existing image path
         else {
             $data['image_path'] = $product->image_path;
         }
@@ -128,7 +126,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Delete image file
         if ($product->image && file_exists(public_path('images/' . $product->image))) {
             unlink(public_path('images/' . $product->image));
         }

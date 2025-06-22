@@ -23,7 +23,18 @@
             </a>
         </div>
 
-       
+        {{-- Users --}}
+        <div class="col-md-4">
+            <a href="{{ route('superadmin.users.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm h-100 border-0 hover-lift">
+                    <div class="card-body text-center py-5">
+                        <i class="bi bi-people display-4"></i>
+                        <h5 class="mt-3">Users</h5>
+                        <span class="badge bg-primary">{{ $userCount }}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
 
         {{-- Orders --}}
         <div class="col-md-4">

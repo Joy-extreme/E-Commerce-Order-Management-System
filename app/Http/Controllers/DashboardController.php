@@ -29,16 +29,12 @@ class DashboardController extends Controller
                 return view('dashboards.admin', compact('orders', 'outlets'));
 
             case 'outlet-in-charge':
-                // the outlet this user manages (adjust field name if different)
                 $managedOutletId = $user->outlet_id;
-
-                // only orders for that outlet
                 $orders = \App\Models\Order::with(['user', 'outlet', 'orderItems'])
                             ->where('outlet_id', $managedOutletId)
                             ->latest()
                             ->get();
 
-                // all OTHER outlets (for transfer dropdown)
                 $outlets = \App\Models\Outlet::where('id', '<>', $managedOutletId)->get();
 
                 return view('dashboards.outlet_in_charge', compact('orders', 'outlets'));
