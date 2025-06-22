@@ -24,6 +24,20 @@
         </div>
 
        
+
+        {{-- Orders --}}
+        <div class="col-md-4">
+            <a href="{{ route('superadmin.outlets.index') }}" class="text-decoration-none">
+                <div class="card shadow-sm h-100 border-0 hover-lift">
+                    <div class="card-body text-center py-5">
+                        <i class="bi bi-receipt-cutoff display-4"></i>
+                        <h5 class="mt-3">Outlet</h5>
+                        <span class="badge bg-primary">{{ $outletCount }}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 @endsection

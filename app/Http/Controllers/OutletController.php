@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Outlet; 
 class OutletController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class OutletController extends Controller
      */
     public function index()
     {
-        //
+        $outlets = Outlet::all();
+        return view('superadmin.outlets.index', compact('outlets'));
     }
 
     /**
@@ -23,7 +24,7 @@ class OutletController extends Controller
      */
     public function create()
     {
-        //
+        return view('superadmin.outlets.create');
     }
 
     /**
@@ -34,7 +35,13 @@ class OutletController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+        ]);
+
+        Outlet::create($request->only(['name', 'location']));
+        return redirect()->route('superadmin.outlets.index')->with('success', 'Outlet created.');
     }
 
     /**
@@ -48,37 +55,25 @@ class OutletController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Outlet $outlet)
     {
-        //
+        return view('superadmin.outlets.edit', compact('outlet'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Outlet $outlet)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+        ]);
+
+        $outlet->update($request->only(['name', 'location']));
+        return redirect()->route('superadmin.outlets.index')->with('success', 'Outlet updated.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Outlet $outlet)
     {
-        //
+        $outlet->delete();
+        return redirect()->route('superadmin.outlets.index')->with('success', 'Outlet deleted.');
     }
 }
