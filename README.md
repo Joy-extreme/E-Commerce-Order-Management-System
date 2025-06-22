@@ -57,8 +57,8 @@ For any questions, suggestions, or contributions, please contact:
 
 **Joy Bhowmik**  
 Email: Joybhowmik67@gmail.com
-GitHub: [https://github.com/yourusername](https://github.com/Joy-extreme)  
-LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/joybhowmik7/)  
+GitHub: (https://github.com/Joy-extreme)  
+LinkedIn: (https://www.linkedin.com/in/joybhowmik7/)  
 
 ---
 
