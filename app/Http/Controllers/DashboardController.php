@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Outlet;
 
 class DashboardController extends Controller
 {
@@ -13,8 +17,12 @@ class DashboardController extends Controller
 
         switch ($user->role) {
             case 'super-admin':
-                return view('dashboards.super_admin');
+                case 'super-admin':
+                $productCount = Product::count();
+                $userCount = User::count();
+                $outletCount = Outlet::count();
 
+                return view('dashboards.super_admin', compact('productCount', 'userCount',  'outletCount'));
             case 'admin':
                 $orders = \App\Models\Order::with(['user', 'outlet', 'orderItems'])->latest()->get();
                 $outlets = \App\Models\Outlet::all();
