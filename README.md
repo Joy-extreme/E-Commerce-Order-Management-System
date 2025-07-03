@@ -1,7 +1,7 @@
 # E-Commerce Order Management System
 
 ## Overview
-This is a role-based order management system designed for an e-commerce platform. The system supports three types of users with distinct access permissions and responsibilities, facilitating efficient order handling and product management across multiple outlets.
+This is a role-based order management system designed for an e-commerce platform. The system supports four types of users with distinct access permissions and responsibilities, facilitating efficient order handling and product management across multiple outlets.
 
 ---
 
